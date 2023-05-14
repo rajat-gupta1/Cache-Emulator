@@ -5,8 +5,8 @@
 3) Variable Block Size
 4) Block Placement Strategy  
     a) Direct Mapped Cache  
-    b) Fully associa1ve Cache  
-    c) N-way associa1ve cache for arbitrary n  
+    b) Fully associative Cache  
+    c) N-way associative cache for arbitrary n  
 5) Block Replacement Policy:  
     a) Random
     b) LRU
@@ -16,7 +16,7 @@
     a) Daxpy
     b) MxM
     c) MxM_Block
-8) CPU instruc1ons for double precision floa1ng point arithme1c:  
+8) CPU instructions for double precision floating point arithmetic:  
     (a) value3 = addDouble(value1, value2)
     (b) value3 = multDouble(value1, value2)
     (c) value = loadDouble(address)
@@ -24,7 +24,8 @@
 
 ## Events
 
-The program is monitoring the following events: a) Instruc8on Counts
+The program is monitoring the following events: 
+a) Instruction Counts
 b) Read Hits
 c) Read Misses
 d) Write Hits
