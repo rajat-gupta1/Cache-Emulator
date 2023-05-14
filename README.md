@@ -24,7 +24,7 @@
 
 ## Events
 
-The program is monitoring the following events: 
+The program is monitoring the following events:  
 a) Instruction Counts
 b) Read Hits
 c) Read Misses
