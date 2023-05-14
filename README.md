@@ -25,11 +25,11 @@
 ## Events
 
 The program is monitoring the following events:  
-a) Instruction Counts
-b) Read Hits
-c) Read Misses
-d) Write Hits
-e) Write Misses
+a) Instruction Counts  
+b) Read Hits  
+c) Read Misses  
+d) Write Hits  
+e) Write Misses  
 
 An example code for executing the executable is:  
 ./cache-sim -a mxm -d 512 -n 8  
