@@ -3,10 +3,10 @@
 1) Variable RAM Size
 2) Variable Cache Size
 3) Variable Block Size
-4) Block Placement Strategy
-    a) Direct Mapped Cache
-    b) Fully associa1ve Cache
-    c) N-way associa1ve cache for arbitrary n
+4) Block Placement Strategy  
+  a) Direct Mapped Cache  
+    b) Fully associa1ve Cache  
+    c) N-way associa1ve cache for arbitrary n  
 5) Block Replacement Policy: 
     a) Random
     b) LRU
