@@ -1,6 +1,5 @@
 ## Capabilities
 
-<pre>
 1) Variable RAM Size
 2) Variable Cache Size
 3) Variable Block Size
@@ -22,8 +21,14 @@
     (b) value3 = multDouble(value1, value2)
     (c) value = loadDouble(address)
     (d) storeDouble(address, value)
-</pre>
 
+## Events
+
+The program is monitoring the following events: a) Instruc8on Counts
+b) Read Hits
+c) Read Misses
+d) Write Hits
+e) Write Misses
 
 An example code for executing the executable is:  
 ./cache-sim -a mxm -d 512 -n 8  
