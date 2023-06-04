@@ -106,7 +106,6 @@ int main(int argc, char *argv[]) {
     
 
     if (algo == "daxpy")
-
     {
 
         std::vector<Address> a(n, 0);

@@ -9,16 +9,21 @@ public:
     // Number of cache lines
     int numSets;
     int numBlocks;
+
+    // Number of sets x cache lines
     std::vector<std::vector<DataBlock>> blocks;
 
     // Map type of vector for the tags associated with the cache
+    // Number of sets x associativity
     std::vector<std::vector<int>> tagMap;
     int cacheSize;
     int dataBlockSize;
     int nWayAssociativity;
 
-    
+    // The number of bits for index
     int indexLength;
+
+    // The number of bits for offset (doubles in the blocks)
     int offsetLength;
 
     void Cache_init(int cSize, int dbSize, int nWAssociativity)
@@ -27,13 +32,10 @@ public:
         dataBlockSize = dbSize;
         nWayAssociativity = nWAssociativity;
 
-        // The number of bits in index
         indexLength = log2(cacheSize) - log2(dataBlockSize) - log2(nWayAssociativity);
-
-        // The number of bits in the offset (doubles in the blocks)
         offsetLength = log2(dataBlockSize) - log2(double_size);
         
-        // Number of sets 
+        // Number of sets in a cache line
         numSets = pow(2, indexLength);
 
         // Number of doubles in a cache line

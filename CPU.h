@@ -34,6 +34,8 @@ public:
     int offsetLength;
     int numSets;
 
+    // To keep track of state of the number of operations that have taken place
+    // This is for LRU and FIFO replacement policies
     long long globalCtr;
 
     Cpu(int cSize, int dbSize, int nWAssociativity, std::string rPolicy, std::string Algo, int rSize)
@@ -53,32 +55,43 @@ public:
         numSets = pow(2, indexLength);
         resetCounts();
 
-        
         lru.resize(numSets, std::vector<int>(nWayAssociativity, 0));
         fifo.resize(numSets, std::vector<int>(nWayAssociativity, 0));
         globalCtr = 0;
     }
 
+    /*
+    Method to reset the Misses and hits count
+    */
     void resetCounts()
     {
         readMisses = 0;
         readHits = 0;
         writeMisses = 0;
         writeHits = 0;
+
+        // Filling values inside tagMap with -1
         for (auto &v: myCache.tagMap) {
             std::fill(v.begin(), v.end(), -1);
         }
     }
 
+    // Method to load double values
     double loadDouble (Address address)
     {
+        // Incrementing the global counter
         globalCtr++;
+
+        // Getting index and tag values from the address class
         int thisIndex = address.getIndex(indexLength, offsetLength);
         int thisTag = address.getTag(indexLength, offsetLength);
         double value = 0;
         int cnt = 0; 
+
+        // Checking if the value is already in cache
         for (int i = 0; i < nWayAssociativity; i++)
         {
+            // If the value is already in cache
             if (thisTag == myCache.tagMap[thisIndex][i])
             {
                 lru[thisIndex][i] = globalCtr;
@@ -91,6 +104,8 @@ public:
         int minFIFO = fifo[thisIndex][0];
         int fifoIndex = 0;
         int lruIndex = 0;
+
+        // Finding the least value of LRU and FIFO 
         for (int i = 1; i < nWayAssociativity; i++)
         {
             if (lru[thisIndex][i] < minLRU)
@@ -127,6 +142,7 @@ public:
         return value;
     }
 
+    // Method to store double values
     void storeDouble (Address address, double value)
     {
         globalCtr++;
