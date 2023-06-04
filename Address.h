@@ -50,7 +50,7 @@ public:
     int indexLength;
     int offsetLength;
 
-    // One way, two way... or fully associative
+    // One way, two way... fully associative
     int associativity;
 
     Address(int num)

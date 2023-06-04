@@ -1,15 +1,28 @@
 #include "Cache.h"
 
+/*
+The CPU class loads values in the register from cache, does computations and 
+stores them back into the cache.
+*/
 class Cpu {
 public:
     Cache myCache;
+
+    // Vector for storing the usage timestamps of different cache lines
     std::vector<std::vector<int>> lru;
+
+    // Vector for storing the order of timestamps different cache lines entered
+    // the cache
     std::vector<std::vector<int>> fifo;
     Ram myRam;
     int cacheSize;
     int dataBlockSize;
     int nWayAssociativity;
+
+    // FIFO, LRU or Random replacement policy inside cache
     std::string replacementPolicy;
+
+    // daxpy, mxm or mxm blocked
     std::string algo;
 
     int readMisses;
@@ -36,7 +49,7 @@ public:
         offsetLength = log2(dataBlockSize) - log2(double_size);
 
         myCache.Cache_init(cacheSize, dataBlockSize, nWayAssociativity, replacementPolicy, algo);
-        myRam.Ram_init(cacheSize, dataBlockSize, nWayAssociativity, replacementPolicy, algo, rSize);
+        myRam.Ram_init(dataBlockSize, rSize);
         numSets = pow(2, indexLength);
         resetCounts();
 

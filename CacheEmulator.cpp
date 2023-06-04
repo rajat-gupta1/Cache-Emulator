@@ -9,8 +9,13 @@ class Cpu;
 class DataBlock;
 class Ram;
 
+// Defining dataBlock Size to be constant to begin with to be used by the 
+// classes. This can be changed during execution
 int DataBlock::size = 64;
 
+/*
+Function to modify values basis user inputs
+*/
 int Inputs(int argc, char* argv[], int *cacheSize, int *dataBlockSize, int *nWayAssociativity, std::string *replacementPolicy, std::string *algo, int *n, int *B, std::string *to_print) 
 {
     for (int i = 1; i < argc; i++)
@@ -82,6 +87,8 @@ int main(int argc, char *argv[]) {
 
     std::string to_print = "np";
     int inputs = Inputs(argc, argv, &cacheSize, &dataBlockSize, &nWayAssociativity, &replacementPolicy, &algo, &n, &B, &to_print);
+    
+    // In case invalid arguments were passed
     if (inputs == 1)
         return EXIT_FAILURE;
 

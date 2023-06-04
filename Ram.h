@@ -2,6 +2,10 @@
 
 #define double_size 1
 
+/*
+The class DataBlock is used to store data corresponding to a cache line.
+By default, it is assumed to be 64 bytes
+*/
 class DataBlock {
 public:
     static int size;
@@ -9,45 +13,44 @@ public:
 
     DataBlock()
     {
+        // Since we are storing doubles only
         data.resize(size/8);
     }
 };
 
+/*
+The class Ram is used to mimic the behaviour of memory.
+*/
 class Ram {
 public:
+
+    // The number of blocks the Ram can store
     int numBlocks; 
     std::vector<DataBlock> data;
-
-    int cacheSize;
     int dataBlockSize;
-    int nWayAssociativity;
-    std::string replacementPolicy;
-    std::string algo;
 
-    int indexLength;
-    int offsetLength;
-
-    void Ram_init(int cSize, int dbSize, int nWAssociativity, std::string rPolicy, std::string Algo, int rSize)
+    void Ram_init(int dbSize, int rSize)
     {
-        cacheSize = cSize;
         dataBlockSize = dbSize;
-        nWayAssociativity = nWAssociativity;
-        replacementPolicy = rPolicy;
-        algo = Algo;
 
-        indexLength = log2(cacheSize) - log2(dataBlockSize) - log2(nWayAssociativity);
-        offsetLength = log2(dataBlockSize) - log2(double_size);
-
+        // rSize is the size of the Ram
         numBlocks = pow(2, rSize);
-
         data.resize(numBlocks);
     }
 
+    /*
+    The getBlock method is used to get a block equivalent to cache line 
+    size from Ram to Cache
+    */
     DataBlock getBlock(Address address)
     {
         return data[floor(address.address/dataBlockSize)];
     }
 
+    /*
+    The setBlock method is used to set a block equivalent to cache line 
+    size to Ram from Cache
+    */
     void setBlock(Address address, DataBlock value)
     {
         data[floor(address.address/dataBlockSize)] = value;
